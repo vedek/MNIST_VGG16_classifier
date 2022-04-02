@@ -1,9 +1,11 @@
-# Transfer learning: VGG16 (pretrained in Imagenet) to MNIST dataset
+# Transfer learning: VGG19 (pretrained in Imagenet) to MNIST dataset
 
 
 ## Contents
 
-This project is focused on how transfer learning can be useful for adapting an already trained VGG16 net (in Imagenet) to a classifier for the MNIST numbers dataset. 
+This project compares VGG19 transfer learnt vs 10 layers frozen in retrained on 10 epochs. Proves the freezing approach! Change and experiment as necessary!
+
+This project is focused on how transfer learning can be useful for adapting an already trained VGG19 net (in Imagenet) to a classifier for the MNIST numbers dataset. 
 
 The strategy has followed a canonical transfer learning pipeline, freezing the last layers and embedding into the net a new custom classifier. 
 
