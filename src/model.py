@@ -3,15 +3,15 @@ import torch.nn as nn
 import torch
 
 
-class Vgg16Mnist:
+class Vgg19Mnist:
 
     def __init__(self, pretrained: bool=True):
         self.pretrained = pretrained
-        self.vgg16 = models.vgg16_bn(pretrained=pretrained)
+        self.vgg19 = models.vgg19_bn(pretrained=pretrained)
 
     def freeze_layers(self):
-        # Freeze VGG16 model weights (all layers)
-        for param in self.vgg16.parameters():
+        # Freeze VGG19 model weights (all layers)
+        for param in self.vgg19.parameters():
             param.requires_grad = False
 
     def add_classifier(self):
@@ -21,7 +21,7 @@ class Vgg16Mnist:
         MNIST_N_CLASSES = 10
 
         # TODO: translate hardcoded layer parameters to constants outside the signature
-        self.vgg16.classifier[6] = nn.Sequential(
+        self.vgg19.classifier[6] = nn.Sequential(
                                                 nn.Linear(4096, 256),
                                                 nn.ReLU(),
                                                 nn.Dropout(0.4),
@@ -34,9 +34,9 @@ class Vgg16Mnist:
         self.freeze_layers()
         self.add_classifier()
 
-    def model(self) -> models.vgg16_bn:
+    def model(self) -> models.vgg19_bn:
         # Return the model only
-        return self.vgg16
+        return self.vgg19
 
     def set_test_mode(self, weight_path: str):
         if torch.cuda.is_available():
@@ -45,10 +45,10 @@ class Vgg16Mnist:
             device = "cpu"
 
         self.transfer_learning_prep()
-        self.vgg16.load_state_dict(torch.load(weight_path, map_location=torch.device(device)))
+        self.vgg19.load_state_dict(torch.load(weight_path, map_location=torch.device(device)))
 
         if torch.cuda.is_available():
-            self.vgg16.to("cuda")
+            self.vgg19.to("cuda")
 
     def evaluate(self, input):
-        return self.vgg16(input)
+        return self.vgg19(input)
