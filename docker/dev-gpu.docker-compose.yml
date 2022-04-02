@@ -19,3 +19,5 @@ services:
         hard: -1
       stack: 67108864
     command: bash -c "python3 test.py"
+    command: bash -c "python3 transfer learning.py"
+    command: bash -c "python3 test.py"
