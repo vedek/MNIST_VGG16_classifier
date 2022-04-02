@@ -9,4 +9,6 @@ services:
     volumes:
       - ../:/opt/project
     command: bash -c "python3 test.py"
+    command: bash -c "python3 transfer learning.py"
+    command: bash -c "python3 test.py"
 
